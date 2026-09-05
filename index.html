@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informačný kompas — August 2026 | Gramotné Slovensko</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --royal:#001A9C;
+  --royal-bright:#3752e6;
+  --coral:#FF6648;
+  --coral-light:#ff8a70;
+  --periwinkle:#E8EEFF;
+  --peach:#FFE1D7;
+  --bg:#05071a;
+  --bg-alt:#080b24;
+  --surface:#0e1330;
+  --surface-2:#131a42;
+  --border:rgba(232,238,255,0.10);
+  --border-strong:rgba(232,238,255,0.18);
+  --text:#f3f5ff;
+  --text-dim:#9aa3d6;
+  --text-dimmer:#6a72a3;
+  --red:#e5484d;
+  --orange:#f6862c;
+  --yellow:#f5d020;
+  --lgreen:#a8d97a;
+  --green:#22a559;
+  --radius:18px;
+  --maxw:1180px;
+  --shadow: 0 20px 60px -20px rgba(0,0,0,0.6);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:'DM Sans', system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{
+  font-family:'Space Grotesk', 'DM Sans', sans-serif;
+  font-weight:700;
+  line-height:1.15;
+  margin:0 0 .5em 0;
+  letter-spacing:-0.01em;
+}
+p{margin:0 0 1em 0;}
+a{color:inherit;}
+img{max-width:100%;display:block;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+section{position:relative;padding:96px 0;}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--coral-light);
+  margin-bottom:14px;
+}
+.eyebrow::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--coral);box-shadow:0 0 0 4px rgba(255,102,72,0.18);}
+.section-head{max-width:720px;margin-bottom:48px;}
+.section-head h2{font-size:clamp(28px,3.6vw,42px);}
+.section-head .lede{color:var(--text-dim);font-size:17px;max-width:640px;}
+
+/* ---------- background texture ---------- */
+.bg-glow{
+  position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(760px 520px at 12% -8%, rgba(0,26,156,0.55), transparent 60%),
+    radial-gradient(600px 500px at 92% 8%, rgba(255,102,72,0.14), transparent 60%),
+    radial-gradient(900px 700px at 50% 115%, rgba(0,26,156,0.35), transparent 60%),
+    var(--bg);
+}
+.grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- nav ---------- */
+header.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  backdrop-filter:blur(14px) saturate(140%);
+  background:rgba(5,7,26,0.72);
+  border-bottom:1px solid var(--border);
+  transition:background .3s ease;
+}
+.nav-inner{max-width:var(--maxw);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px;}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;white-space:nowrap;}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--coral);}
+.navlinks{display:flex;gap:26px;list-style:none;margin:0;padding:0;font-size:14px;color:var(--text-dim);}
+.navlinks a{text-decoration:none;padding:6px 0;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;}
+.navlinks a:hover, .navlinks a.active{color:var(--text);border-color:var(--coral);}
+.nav-cta{
+  background:var(--coral);color:#0a0a0a;font-weight:700;font-size:13.5px;
+  padding:9px 16px;border-radius:100px;text-decoration:none;display:flex;align-items:center;gap:7px;
+  white-space:nowrap;transition:transform .15s ease, box-shadow .2s ease;
+  box-shadow:0 6px 18px -4px rgba(255,102,72,0.55);
+}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 10px 24px -4px rgba(255,102,72,0.7);}
+.navlinks-mobile-toggle{display:none;background:none;border:1px solid var(--border-strong);color:var(--text);width:38px;height:38px;border-radius:10px;align-items:center;justify-content:center;cursor:pointer;flex:none;}
+.mobile-menu{display:none;flex-direction:column;gap:2px;padding:10px 24px 18px;border-top:1px solid var(--border);}
+.mobile-menu a{color:var(--text-dim);text-decoration:none;padding:12px 4px;font-size:15px;border-bottom:1px solid var(--border);}
+.mobile-menu a:last-child{border-bottom:none;}
+@media (max-width:880px){
+  .navlinks{display:none;}
+  .navlinks-mobile-toggle{display:flex;}
+  header.nav.menu-open .mobile-menu{display:flex;}
+}
+
+/* ---------- hero ---------- */
+.hero{padding:168px 0 90px;}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:40px;}}
+.hero h1{font-size:clamp(40px,6.4vw,74px);
+  background:linear-gradient(100deg,#fff 20%, var(--periwinkle) 55%, var(--peach) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero .month-tag{
+  display:inline-block;margin-bottom:20px;font-family:'Space Grotesk',sans-serif;font-weight:600;
+  color:var(--royal-bright);background:rgba(59,82,230,0.14);border:1px solid rgba(59,82,230,0.35);
+  padding:7px 14px;border-radius:100px;font-size:13px;letter-spacing:.04em;
+}
+.hero .lede{font-size:18px;color:var(--text-dim);max-width:560px;}
+.hero-cta-row{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;}
+.btn{
+  font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14.5px;
+  padding:14px 24px;border-radius:100px;text-decoration:none;display:inline-flex;align-items:center;gap:9px;
+  cursor:pointer;border:1px solid transparent;transition:transform .15s ease, box-shadow .2s ease, background .2s ease;
+}
+.btn-primary{background:var(--coral);color:#0a0a0a;box-shadow:0 10px 26px -8px rgba(255,102,72,0.6);}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 30px -6px rgba(255,102,72,0.75);}
+.btn-ghost{background:rgba(255,255,255,0.04);color:var(--text);border-color:var(--border-strong);}
+.btn-ghost:hover{background:rgba(255,255,255,0.08);}
+
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.stat-card{
+  background:linear-gradient(155deg, var(--surface-2), var(--surface));
+  border:1px solid var(--border);border-radius:var(--radius);padding:20px 18px;
+  box-shadow:var(--shadow);
+}
+.stat-card .k{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:26px;color:var(--text);}
+.stat-card .k.pos{color:var(--green);} .stat-card .k.neg{color:var(--red);}
+.stat-card .lbl{font-size:12.5px;color:var(--text-dim);margin-top:4px;}
+
+/* ---------- cards / grids ---------- */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+@media (max-width:760px){.grid2{grid-template-columns:1fr;}}
+.card{
+  background:linear-gradient(160deg, rgba(255,255,255,0.035), rgba(255,255,255,0.01));
+  border:1px solid var(--border);border-radius:var(--radius);padding:26px 26px;
+}
+.card h3{font-size:16px;letter-spacing:.01em;}
+.card h3 .icon-risk{color:var(--red);}
+.card h3 .icon-point{color:var(--green);}
+.point-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px;}
+.point-list li{display:flex;gap:12px;font-size:14.5px;color:var(--text-dim);}
+.point-list .num{
+  flex:none;width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12px;color:var(--text);
+}
+.point-list.points .num{background:rgba(34,165,89,0.18);color:var(--green);}
+.point-list.risks .num{background:rgba(229,72,77,0.18);color:var(--red);}
+
+/* commentary block */
+.commentary{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:28px 30px;margin-bottom:34px;
+}
+.commentary p{color:var(--text-dim);font-size:15px;}
+.commentary .clamp{
+  display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;
+}
+.commentary .clamp.open{-webkit-line-clamp:unset;}
+.readmore{
+  background:none;border:none;color:var(--periwinkle);font-family:'Space Grotesk',sans-serif;font-weight:600;
+  font-size:13.5px;cursor:pointer;padding:0;display:inline-flex;align-items:center;gap:6px;margin-top:6px;
+}
+.readmore svg{transition:transform .25s ease;}
+.readmore.open svg{transform:rotate(180deg);}
+
+/* ---------- semafor bar ---------- */
+.semafor{margin:56px 0 6px;}
+.semafor-labels{display:flex;justify-content:space-between;font-size:13px;color:var(--text-dim);margin-bottom:10px;}
+.semafor-labels b{color:var(--text);font-family:'Space Grotesk',sans-serif;}
+.semafor-track{
+  position:relative;height:22px;border-radius:11px;overflow:visible;
+  background:linear-gradient(90deg,var(--red),var(--orange) 25%, var(--yellow) 50%, var(--lgreen) 75%, var(--green));
+  border:1px solid rgba(0,0,0,0.3);
+}
+.semafor-avg{position:absolute;top:-8px;bottom:-8px;width:0;border-left:2px dashed rgba(255,255,255,0.75);}
+.semafor-avg span{position:absolute;top:-46px;left:50%;transform:translateX(-50%);font-size:11.5px;white-space:nowrap;color:var(--text-dim);}
+.semafor-marker{
+  position:absolute;top:50%;width:0;height:0;
+  border-left:9px solid transparent;border-right:9px solid transparent;border-bottom:16px solid var(--coral);
+  transform:translate(-50%,-120%);filter:drop-shadow(0 2px 6px rgba(255,102,72,0.6));
+  transition:left 1.1s cubic-bezier(.2,.8,.2,1);
+}
+.semafor-marker span{position:absolute;top:-24px;left:50%;transform:translateX(-50%);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;color:var(--coral-light);white-space:nowrap;}
+
+/* ---------- gauges ---------- */
+.gauge-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px;}
+@media (max-width:760px){.gauge-row{grid-template-columns:1fr 1fr;}}
+@media (max-width:480px){.gauge-row{grid-template-columns:1fr;}}
+.gauge-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px 14px 16px;text-align:center;
+}
+.gauge-card svg{width:100%;height:auto;max-width:170px;}
+.gauge-card .glabels{display:flex;justify-content:space-between;font-size:10.5px;color:var(--text-dimmer);margin-top:-6px;padding:0 6px;}
+.gauge-card .gtitle{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13px;margin-top:8px;color:var(--text);}
+
+/* ---------- tabs ---------- */
+.tabs{display:flex;gap:8px;margin:36px 0 18px;flex-wrap:wrap;}
+.tab-btn{
+  background:rgba(255,255,255,0.04);border:1px solid var(--border-strong);color:var(--text-dim);
+  font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13.5px;padding:9px 18px;border-radius:100px;cursor:pointer;
+  transition:all .2s ease;
+}
+.tab-btn.active{background:var(--periwinkle);color:#0a0f2e;border-color:var(--periwinkle);}
+.tab-panel{display:none;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px 28px;}
+.tab-panel.active{display:block;animation:fadein .35s ease;}
+.tab-panel h4{font-size:15px;color:var(--coral-light);margin-bottom:8px;}
+.tab-panel p{color:var(--text-dim);font-size:14.5px;}
+@keyframes fadein{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+/* ---------- market data tables ---------- */
+.data-table-wrap{overflow-x:auto;border-radius:var(--radius);border:1px solid var(--border);}
+table.datatbl{width:100%;border-collapse:collapse;font-size:13.5px;min-width:480px;}
+table.datatbl th, table.datatbl td{padding:12px 16px;text-align:right;white-space:nowrap;}
+table.datatbl th:first-child, table.datatbl td:first-child{text-align:left;}
+table.datatbl thead th{
+  background:rgba(255,255,255,0.03);color:var(--text-dim);font-family:'Space Grotesk',sans-serif;font-weight:600;
+  font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border);
+}
+table.datatbl tbody tr{border-bottom:1px solid var(--border);}
+table.datatbl tbody tr:last-child{border-bottom:none;}
+table.datatbl tbody tr:hover{background:rgba(255,255,255,0.03);}
+.trend-up{color:var(--green);} .trend-down{color:var(--red);} .trend-flat{color:var(--text-dim);}
+.mini-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px;}
+@media (max-width:760px){.mini-cards{grid-template-columns:1fr 1fr;}}
+.mini-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px 16px;}
+.mini-card .lbl{font-size:12px;color:var(--text-dim);}
+.mini-card .val{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;margin-top:4px;}
+.mini-card .chg{font-size:12.5px;margin-top:2px;}
+
+/* bar chart */
+.barchart{margin-top:26px;display:flex;flex-direction:column;gap:12px;}
+.barchart-row{display:grid;grid-template-columns:120px 1fr 62px;align-items:center;gap:12px;font-size:13px;}
+.barchart-row .name{color:var(--text-dim);}
+.barchart-track{height:12px;border-radius:8px;background:rgba(255,255,255,0.06);overflow:hidden;}
+.barchart-fill{height:100%;border-radius:8px;width:0;transition:width 1.2s cubic-bezier(.2,.8,.2,1);
+  background:linear-gradient(90deg,var(--royal-bright),var(--coral));}
+.barchart-row .pct{font-family:'Space Grotesk',sans-serif;font-weight:700;text-align:right;color:var(--text);}
+
+.netreturn-box{
+  margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:14px;
+}
+@media (max-width:600px){.netreturn-box{grid-template-columns:1fr;}}
+.netreturn-box .nrc{
+  background:linear-gradient(160deg, rgba(0,26,156,0.35), rgba(0,26,156,0.08));
+  border:1px solid rgba(59,82,230,0.35);border-radius:14px;padding:16px 18px;
+}
+.netreturn-box .nrc .lbl{font-size:12.5px;color:var(--periwinkle);}
+.netreturn-box .nrc .val{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:24px;margin-top:4px;}
+
+/* ---------- performance table section ---------- */
+.perf-table-wrap{overflow-x:auto;border-radius:var(--radius);border:1px solid var(--border);}
+table.perftbl{width:100%;border-collapse:collapse;font-size:13px;min-width:820px;}
+table.perftbl th, table.perftbl td{padding:13px 14px;text-align:right;}
+table.perftbl th:first-child, table.perftbl td:first-child{text-align:left;position:sticky;left:0;background:var(--bg-alt);}
+table.perftbl thead th{
+  background:rgba(255,255,255,0.04);color:var(--text-dim);font-family:'Space Grotesk',sans-serif;font-weight:600;
+  font-size:11px;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--border);cursor:pointer;
+  user-select:none;white-space:nowrap;
+}
+table.perftbl thead th:first-child{cursor:default;}
+table.perftbl thead th .arrow{opacity:.4;font-size:10px;margin-left:3px;}
+table.perftbl thead th.sorted .arrow{opacity:1;color:var(--coral-light);}
+table.perftbl tbody tr{border-bottom:1px solid var(--border);}
+table.perftbl tbody tr:hover{background:rgba(255,255,255,0.03);}
+table.perftbl td.fundname{font-weight:600;color:var(--text);white-space:nowrap;}
+.perf-bar-cell{position:relative;min-width:110px;}
+.perf-bar-bg{position:absolute;left:14px;right:14px;top:50%;transform:translateY(-50%);height:16px;z-index:0;border-radius:5px;overflow:hidden;background:rgba(255,255,255,0.05);}
+.perf-bar-fg{height:100%;background:linear-gradient(90deg,var(--royal-bright),var(--coral));width:0%;transition:width 1s ease;}
+.perf-bar-val{position:relative;z-index:1;font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--text);}
+.perf-note{font-size:12px;color:var(--text-dimmer);margin-top:14px;}
+
+/* ---------- accordion (media themes) ---------- */
+.accordion{display:flex;flex-direction:column;gap:12px;}
+.acc-item{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+.acc-head{
+  display:flex;align-items:center;gap:16px;padding:18px 22px;cursor:pointer;
+}
+.acc-head .accnum{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;color:var(--coral-light);
+  flex:none;width:30px;height:30px;border-radius:9px;background:rgba(255,102,72,0.14);
+  display:flex;align-items:center;justify-content:center;
+}
+.acc-head .acctitle{flex:1;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14.5px;}
+.acc-head .accchevron{transition:transform .25s ease;color:var(--text-dim);flex:none;}
+.acc-item.open .accchevron{transform:rotate(180deg);}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .35s ease;}
+.acc-body-inner{padding:0 22px 22px 68px;color:var(--text-dim);font-size:14px;}
+
+/* ---------- calculator ---------- */
+.calc-card{
+  background:linear-gradient(155deg, rgba(0,26,156,0.4), rgba(14,19,48,0.9));
+  border:1px solid rgba(59,82,230,0.4);border-radius:24px;padding:38px;
+  display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;
+}
+@media (max-width:820px){.calc-card{grid-template-columns:1fr;padding:26px;}}
+.calc-field{margin-bottom:22px;}
+.calc-field label{display:block;font-size:13px;color:var(--text-dim);margin-bottom:8px;font-family:'Space Grotesk',sans-serif;font-weight:600;}
+.calc-field .row{display:flex;align-items:center;gap:12px;}
+.calc-input{
+  background:rgba(255,255,255,0.06);border:1px solid var(--border-strong);color:var(--text);
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;padding:10px 14px;border-radius:10px;width:120px;
+}
+.calc-slider{-webkit-appearance:none;flex:1;height:6px;border-radius:4px;background:rgba(255,255,255,0.12);outline:none;}
+.calc-slider::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--coral);cursor:pointer;box-shadow:0 4px 12px rgba(255,102,72,0.6);}
+.calc-slider::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--coral);cursor:pointer;border:none;}
+.chip-row{display:flex;gap:8px;flex-wrap:wrap;}
+.chip{
+  background:rgba(255,255,255,0.05);border:1px solid var(--border-strong);color:var(--text-dim);
+  font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13px;padding:8px 15px;border-radius:100px;cursor:pointer;
+}
+.chip.active{background:var(--coral);border-color:var(--coral);color:#0a0a0a;}
+.calc-result{
+  background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.1);border-radius:18px;padding:28px;text-align:center;
+}
+.calc-result .biglabel{font-size:13px;color:var(--periwinkle);font-family:'Space Grotesk',sans-serif;font-weight:600;}
+.calc-result .bignum{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(38px,5vw,56px);color:var(--coral-light);margin:8px 0;}
+.calc-result .subline{font-size:13px;color:var(--text-dim);}
+.calc-result .waitline{
+  margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.1);font-size:12.5px;color:var(--peach);
+}
+.calc-disclaimer{font-size:11.5px;color:var(--text-dimmer);margin-top:18px;line-height:1.5;}
+
+/* ---------- contact / CTA ---------- */
+.contact-card{
+  background:linear-gradient(135deg, var(--royal) 0%, #000a4d 55%, #05071a 100%);
+  border-radius:28px;padding:56px;display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center;
+  position:relative;overflow:hidden;
+}
+.contact-card::after{content:'';position:absolute;right:-80px;top:-80px;width:280px;height:280px;border-radius:50%;
+  background:radial-gradient(circle, rgba(255,102,72,0.35), transparent 70%);}
+@media (max-width:820px){.contact-card{grid-template-columns:1fr;padding:34px;}}
+.contact-card h2{font-size:clamp(26px,3.4vw,38px);}
+.credentials-row{display:flex;gap:26px;margin-top:22px;flex-wrap:wrap;}
+.credentials-row .c{}
+.credentials-row .c .num{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:24px;color:var(--peach);}
+.credentials-row .c .lbl{font-size:12px;color:var(--periwinkle);opacity:.8;}
+.contact-panel{
+  background:rgba(255,255,255,0.06);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.14);
+  border-radius:20px;padding:28px;text-align:center;
+}
+.contact-panel .whatsapp-btn{
+  width:100%;justify-content:center;background:#25D366;color:#06210f;box-shadow:0 10px 26px -8px rgba(37,211,102,0.6);
+}
+.contact-panel .whatsapp-btn:hover{box-shadow:0 14px 30px -6px rgba(37,211,102,0.75);}
+.contact-panel .or{color:var(--periwinkle);font-size:12.5px;margin:14px 0;opacity:.7;}
+.contact-panel .email-link{font-size:14px;color:var(--periwinkle);text-decoration:underline;}
+
+/* floating whatsapp */
+.wa-float{
+  position:fixed;bottom:24px;right:24px;z-index:90;
+  width:60px;height:60px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 12px 28px -6px rgba(37,211,102,0.65);text-decoration:none;
+  animation:pulse 2.6s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.07);}}
+@media (max-width:600px){.wa-float{width:52px;height:52px;bottom:16px;right:16px;}}
+
+/* ---------- footer ---------- */
+footer{padding:70px 0 40px;border-top:1px solid var(--border);margin-top:40px;}
+.footer-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:50px;}
+@media (max-width:760px){.footer-grid{grid-template-columns:1fr;}}
+.footer-logo{width:150px;opacity:.92;margin-bottom:14px;}
+footer .sources{font-size:12px;color:var(--text-dimmer);line-height:1.7;margin-top:6px;}
+.disclaimer-box{
+  background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:14px;padding:22px 24px;
+  font-size:11.5px;color:var(--text-dimmer);line-height:1.65;
+}
+.disclaimer-box strong{color:var(--text-dim);}
+footer .foot-meta{margin-top:30px;padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12.5px;color:var(--text-dimmer);}
+
+/* reveal animation */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease, transform .7s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* scroll cue */
+.scrollcue{display:flex;align-items:center;gap:10px;margin-top:52px;color:var(--text-dimmer);font-size:12.5px;}
+.scrollcue .line{width:38px;height:1px;background:var(--text-dimmer);}
+
+::selection{background:var(--coral);color:#0a0a0a;}
+</style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+<div class="grain"></div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="brand"><span class="dot"></span> Informačný kompas</div>
+    <ul class="navlinks">
+      <li><a href="#svet" data-nav>Svet</a></li>
+      <li><a href="#trhy" data-nav>Trhy</a></li>
+      <li><a href="#vykonnost" data-nav>Výkonnosť</a></li>
+      <li><a href="#temy" data-nav>Témy mesiaca</a></li>
+      <li><a href="#pre-vas" data-nav>Pre vás</a></li>
+    </ul>
+    <a class="nav-cta" id="navWaBtn" href="#" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.44 9.9-9.9 0-2.64-1.03-5.13-2.9-7-1.87-1.87-4.36-2.92-7-2.92zm0 18.02h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.32a8.24 8.24 0 0 1-1.26-4.4c0-4.55 3.7-8.25 8.26-8.25 2.2 0 4.28.86 5.84 2.42a8.2 8.2 0 0 1 2.41 5.84c0 4.55-3.7 8.28-8.25 8.28z"/></svg>
+      Napíšte mi
+    </a>
+    <button class="navlinks-mobile-toggle" aria-label="menu" id="mobileMenuToggle">☰</button>
+  </div>
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="#svet" data-nav-mobile>Svet</a>
+    <a href="#trhy" data-nav-mobile>Trhy</a>
+    <a href="#vykonnost" data-nav-mobile>Výkonnosť</a>
+    <a href="#temy" data-nav-mobile>Témy mesiaca</a>
+    <a href="#pre-vas" data-nav-mobile>Pre vás</a>
+    <a href="#kontakt" data-nav-mobile>Kontakt</a>
+  </nav>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="month-tag">GRAMOTNÉ SLOVENSKO · MESAČNÝ PREHĽAD TRHOV</span>
+      <h1>Informačný<br>kompas</h1>
+      <p class="lede">Vaša mesačná orientácia vo svete investícií — <strong>august 2026</strong>. Ako vaša sprievodkyňa na kapitálových trhoch vám prehľadne vysvetlím, čo sa v uplynulom mesiaci stalo, prečo na tom záleží a čo to znamená pre váš investičný plán.</p>
+      <div class="hero-cta-row">
+        <a class="btn btn-primary" href="#pre-vas">Čo to znamená pre mňa</a>
+        <a class="btn btn-ghost" href="#svet">Prejsť na prehľad ↓</a>
+      </div>
+      <div class="scrollcue"><div class="line"></div> 6 minút čítania · aktualizované k 31. 8. 2026</div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card reveal">
+        <div class="k pos" data-count="12.3" data-suffix="%">0%</div>
+        <div class="lbl">S&P 500 od začiatku roka</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="k" data-text="6 500 €">0</div>
+        <div class="lbl">Euro Stoxx 50 — nové maximum</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="k pos" data-count="10" data-suffix="%">0%</div>
+        <div class="lbl">Zlato za mesiac august</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="k" data-text="~79 000 $">0</div>
+        <div class="lbl">Bitcoin, rast o 30 % za pár dní</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GLOBÁLNA SITUÁCIA ================= -->
+<section id="svet">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Globálna ekonomika</span>
+      <h2>Ako na tom je svetová ekonomika</h2>
+      <p class="lede">Rast pokračuje, no nerovnomerne — a inflácia zostáva témou číslo jeden pre centrálne banky.</p>
+    </div>
+
+    <div class="commentary reveal">
+      <div class="clamp" id="globalCommentary">
+        <p>Globálna ekonomika vstupuje do druhej polovice roka 2026 v relatívne stabilnom, no stále nerovnomernom stave. Ekonomická aktivita sa počas leta mierne stabilizovala v poklese a svetové hospodárstvo naďalej rastie, hoci medzi jednotlivými regiónmi zostávajú výrazné rozdiely. Eurozóna zaznamenáva mierne zlepšenie hospodárskej aktivity. Výroba aj služby vykazujú mierny rast a ekonomika pokračuje v pomalej expanzii. Pozitívnym signálom je stabilizácia podnikateľskej aktivity, rast však zostáva citlivý na vývoj cien a domáceho dopytu. Americká ekonomika si zachováva určitú odolnosť, no jej rast sa spomalil a slabšie údaje z trhu práce naznačujú opatrnejší výhľad. Tvorba pracovných miest oslabila, hoci nezamestnanosť zostáva nízka a zatiaľ nevidno výraznejšiu vlnu prepúšťania. Inflácia zostáva hlavnou témou globálnej ekonomiky. Cenové tlaky sa v mnohých krajinách zmiernili, ale inflácia v službách zostáva zvýšená a v USA je cenový vývoj stále problémom pre centrálnu banku. Práve smerovanie amerických úrokových sadzieb sa v auguste dostalo do centra pozornosti po vystúpení predsedu Fedu Kevina Warsha. Warsh zdôraznil potrebu udržať infláciu a inflačné očakávania pod kontrolou a naznačil, že Fed nebude smerovať k uvoľňovaniu politiky, ale skôr naopak k upevneniu úrokových sadzieb. Ďalšie rozhodnutia budú závisieť najmä od nových údajov o inflácii a trhu práce. Menová politika sa zároveň medzi jednotlivými ekonomikami čoraz viac rozchádza, pričom niektoré ázijské centrálne banky čelia potrebe držať alebo ďalej zvyšovať sadzby. Naopak čínska centrálna banka stimuluje ekonomiku novou likviditou. Celkovo svetová ekonomika naďalej rastie, no august priniesol jasnejší signál, že boj s infláciou ešte nie je ukončený. Vývoj cien, zamestnanosti a ďalšie kroky centrálnych bánk preto zostávajú kľúčovými témami nasledujúcich mesiacov.</p>
+      </div>
+      <button class="readmore" data-target="globalCommentary">Zobraziť celý komentár <svg width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    </div>
+
+    <div class="grid2 reveal">
+      <div class="card">
+        <h3><span class="icon-point">●</span> Hlavné body situácie</h3>
+        <ul class="point-list points">
+          <li><span class="num">1</span> Globálna ekonomika stabilne pokračuje v raste, rastú aj očakávania.</li>
+          <li><span class="num">2</span> Inflácia sa drží vysoko nad cieľom – rast cien zostáva hlavným problémom.</li>
+          <li><span class="num">3</span> Centrálne banky avizujú možný rast úrokových sadzieb do konca roka.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="icon-risk">▲</span> Možné riziká ďalšieho vývoja</h3>
+        <ul class="point-list risks">
+          <li><span class="num">1</span> Ďalšia eskalácia konfliktu v Iráne = možný energetický šok.</li>
+          <li><span class="num">2</span> Druhá vlna inflácie a vyššie úrokové sadzby.</li>
+          <li><span class="num">3</span> Prudké spomalenie globálnej ekonomiky, AI v bubline.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card reveal" style="margin-top:24px;">
+      <h3>Makroekonomický semafor</h3>
+      <p style="color:var(--text-dim);font-size:14px;margin-top:-6px;">Aktuálne tempo globálneho rastu voči desaťročnému priemeru.</p>
+      <div class="semafor" data-semafor data-value="2.17" data-avg="3.5" data-min="-4" data-max="8" data-value-label="Aktuálny rast 2,17 %" data-avg-label="10R priemer 3,5 %">
+        <div class="semafor-track">
+          <div class="semafor-avg"><span></span></div>
+          <div class="semafor-marker"><span></span></div>
+        </div>
+      </div>
+      <div class="gauge-row">
+        <div class="gauge-card" data-gauge data-value="62" data-left="slabý" data-right="rýchly" data-title="ekonomický mix"></div>
+        <div class="gauge-card" data-gauge data-value="38" data-left="spomalenie" data-right="zrýchlenie" data-title="trend/líder"></div>
+        <div class="gauge-card" data-gauge data-value="90" data-left="veľká" data-right="malá" data-title="riziková prirážka · úverová likvidita"></div>
+      </div>
+    </div>
+
+    <div class="tabs" role="tablist" data-tabgroup="region">
+      <button class="tab-btn active" data-tab="eurozona">🇪🇺 Eurozóna</button>
+      <button class="tab-btn" data-tab="usa">🇺🇸 USA</button>
+      <button class="tab-btn" data-tab="azia">🌏 Ázia</button>
+    </div>
+    <div class="tab-panel active" data-panel="eurozona">
+      <h4>Eurozóna</h4>
+      <p><strong>Inflácia:</strong> zrýchlenie na 3,3 % z júlových 2,8 % — vysoko nad cieľom 2 %. Slovenská inflácia ďalej spomaľuje na 3,3 % z 3,5 %.</p>
+      <p><strong>Ekonomický rast:</strong> očakáva sa rast v 3Q26 o 0,3 % (medzikvartálne), čo je zlepšenie podporené zlepšením nemeckej výroby.</p>
+      <p><strong>Úrokové sadzby:</strong> v septembri takmer isté zvýšenie depozitných sadzieb na 2,5 % a možné decembrové zvýšenie na 2,75 %.</p>
+      <p style="margin-bottom:0;"><strong>Nezamestnanosť:</strong> Eurozóna drží nízko okolo 6,4 %, čo je mierny rast z 6,2 %, no žiadna panika prepúšťania na obzore.</p>
+    </div>
+    <div class="tab-panel" data-panel="usa">
+      <h4>Spojené štáty</h4>
+      <p><strong>Ekonomika:</strong> potvrdený rast v 2Q na 1,5 %, pozitívom je rast domácej spotreby +4,2 %. Rastú očakávania zrýchlenia pre 3Q26.</p>
+      <p><strong>Úrokové sadzby:</strong> po prejave Warsha trh výrazne zvýšil pravdepodobnosť sprísnenia politiky v septembri — na rast sadzieb o +0,25 %.</p>
+      <p><strong>Inflácia:</strong> predstavuje hlavný problém, ktorý potrebuje centrálna banka vyriešiť — stále vysoká +3,4 %. Pozitívom je úľava na jadrovej inflácii k 2,5 %, čo znamená, že vysokú infláciu držia hlavne ceny energií.</p>
+      <p style="margin-bottom:0;"><strong>Nezamestnanosť:</strong> dlhodobo stabilná na 4,1 %. Júlová štatistika ukázala pokles pracovných miest, no prieskumy sú optimistické.</p>
+    </div>
+    <div class="tab-panel" data-panel="azia">
+      <h4>Ázia</h4>
+      <p><strong>Čína:</strong> ekonomika v 2Q26 spomalila na +4,3 % medziročne. Očakávania na rok 2027 znížili na +4,5 %. Nízka inflácia 0,5 %.</p>
+      <p><strong>Japonsko:</strong> japonská ekonomika očakáva mierny rast aj do ďalšieho obdobia. Inflácia rastie a začína byť v Japonsku problémom.</p>
+      <p style="margin-bottom:0;"><strong>Úrokové sadzby:</strong> japonská centrálna banka stimuluje ekonomiku, potrebuje oživiť spotrebu. Japonsko napriek tomu smeruje k rastu sadzieb.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINANČNÉ TRHY ================= -->
+<section id="trhy" style="background:linear-gradient(180deg, transparent, rgba(0,26,156,0.08), transparent);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Finančné trhy</span>
+      <h2>Trhy dosiahli nové historické maximá</h2>
+      <p class="lede">Akcie aj naďalej odmeňujú trpezlivých investorov — dlhopisy a komodity to majú zložitejšie.</p>
+    </div>
+
+    <div class="commentary reveal">
+      <div class="clamp" id="marketCommentary">
+        <p>August na globálnych finančných trhoch potvrdil pokračujúci záujem investorov o rizikovejšie aktíva. Americké a európske trhy dosiahli v polovici augusta nové historické maximá. S&P 500 prekonal úroveň 7 800 USD a Euro Stoxx 50 prekonal 6 500 Eur. Najvýraznejšou témou akciového trhu zostali technologické spoločnosti, AI a ich výsledková sezóna. Pozornosť priťahovala spoločnosť NVIDIA, ktorej výsledky vyvolali prudký rast cien akcií a následný výber ziskov. Výsledková sezóna za druhý štvrťrok celkovo výrazne prekonala očakávania. Približne 86 % spoločností z indexu S&P 500 prekonalo odhady analytikov a ziskovosť bola silná aj mimo technologického sektora. Pozitívne výsledky tak podporili rast akciových trhov a ukázali, že výkonnosť nebola založená iba na úzkej skupine AI titulov. Technologický index Nasdaq zostal počas augusta najdynamickejším z hlavných amerických indexov — mesiac uzavrel rastom +3,9 %. V Ázii bola nálada opatrnejšia, no japonský Nikkei 225 sa po predchádzajúcich prepadoch stabilizoval a mesiac skončil v zisku +3 %, podobne ako juhokórejský index KOSPI. Dlhopisové trhy zostali kolísavé. Výnos amerických 10-ročných štátnych dlhopisov sa pohyboval v závere na 4,75 %, zatiaľ čo tridsaťročné splatnosti prekonali 5,3 % (najviac od 2004). Vyššie dlhodobé výnosy naďalej vytvárali tlak na citlivejšie rastové akcie. Dlhopisy reagovali aj na zásahy zo strany Fedu a vlády USA. Cena ropy dominovala komoditným trhom — cenu výrazne ovplyvňovalo geopolitické napätie a riziko obmedzenia dodávok. Cena ropy Brent sa ku koncu mesiaca pohybovala okolo 90 USD za barel, teda zdraženie o 3 %. Zlato profitovalo zo záujmu investorov o uchovávateľa hodnoty najmä po avíze, že vláda USA bude späť odkupovať viac svojich dlhodobých dlhopisov — zdraželo o 10 %. Z rovnakého dôvodu prudko rástol aj Bitcoin a v závere augusta sa pohyboval okolo 79 000 USD. Celkovo august ukázal, že investori zostávajú ochotní podstupovať riziko, zároveň však venujú zvýšenú pozornosť vysokým cenám titulov AI, dlhopisovým výnosom a geopolitickým udalostiam.</p>
+      </div>
+      <button class="readmore" data-target="marketCommentary">Zobraziť celý komentár <svg width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    </div>
+
+    <div class="grid2 reveal">
+      <div class="card">
+        <h3><span class="icon-point">●</span> Hlavné body situácie</h3>
+        <ul class="point-list points">
+          <li><span class="num">1</span> Akcie zostávajú silné a prekonávajú maximá. Zisky firiem výrazne nad očakávania.</li>
+          <li><span class="num">2</span> Dlhopisové trhy pod tlakom, neistota z vývoja sadzieb a potreba financovať AI.</li>
+          <li><span class="num">3</span> Ropa extrémne kolíše. Zlato a kryptomeny prudko rástli.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="icon-risk">▲</span> Možné riziká ďalšieho vývoja</h3>
+        <ul class="point-list risks">
+          <li><span class="num">1</span> Ďalší rast ceny ropy a rast inflácie v dôsledku konfliktu v Iráne.</li>
+          <li><span class="num">2</span> Obavy z prasknutia AI bubliny a spomalenie globálnej ekonomiky.</li>
+          <li><span class="num">3</span> Väčší tlak na dlhopisy a rast ich výnosov.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card reveal" style="margin-top:24px;">
+      <h3>Akciové trhy — stav, nálada</h3>
+      <p style="color:var(--text-dim);font-size:14px;margin-top:-6px;">Výkonnosť posledných 5 rokov oproti dvadsaťročnému priemeru.</p>
+      <div class="semafor" data-semafor data-value="13.1" data-avg="11.3" data-min="0" data-max="24" data-value-label="Posledných 5R 13,1 %" data-avg-label="Ročný výnos 20R 11,3 %">
+        <div class="semafor-track">
+          <div class="semafor-avg"><span></span></div>
+          <div class="semafor-marker"><span></span></div>
+        </div>
+      </div>
+      <div class="gauge-row">
+        <div class="gauge-card" data-gauge data-value="58" data-left="strach" data-right="extáza" data-title="nálada fin. trhov"></div>
+        <div class="gauge-card" data-gauge data-value="75" data-left="strach" data-right="extáza" data-title="tok peňazí do akcií"></div>
+        <div class="gauge-card" data-gauge data-value="68" data-left="lacné" data-right="drahé" data-title="valuácia akcií"></div>
+      </div>
+    </div>
+
+    <div class="tabs" role="tablist" data-tabgroup="market">
+      <button class="tab-btn active" data-tab="akcie">Akciové trhy</button>
+      <button class="tab-btn" data-tab="dlhopisy">Dlhopisové trhy</button>
+      <button class="tab-btn" data-tab="komodity">Komodity</button>
+      <button class="tab-btn" data-tab="krypto">Kryptomeny</button>
+    </div>
+    <div class="tab-panel active" data-panel="akcie">
+      <h4>Akciové trhy</h4>
+      <p><strong>USA:</strong> americké akcie dosiahli nové historické maximá. Index S&P 500 uzavrel august na +2,6 %. Od začiatku roka je to +12,3 %.</p>
+      <p><strong>Európa:</strong> európske akcie dosiahli nové maximum. Euro Stoxx 50 na 6 500 Eur. Piaty rastový mesiac za sebou.</p>
+      <p style="margin-bottom:0;"><strong>Ázia:</strong> ázijské trhy ostávajú najkolísavejším regiónom, no po prepadoch sa konečne stabilizovali. Kórejský KOSPI aj japonský Nikkei v auguste rástli +3,4 %, resp. +3 %. Čínsky index CSI300 tiež po prepadoch stabilizovaný — august +1 %, no od začiatku roka bez ziskov.</p>
+    </div>
+    <div class="tab-panel" data-panel="dlhopisy">
+      <h4>Dlhopisové trhy</h4>
+      <p><strong>USA:</strong> trh dlhopisov pokračoval aj v auguste pod tlakom. Americké 30-ročné dlhopisy prepadli a dosiahli výnos nad 5,3 %, čo je úroveň z roku 2004. Tieto výnosy zásadne ovplyvňujú hypotekárny trh.</p>
+      <p><strong>Európa:</strong> európske dlhopisy nasledovali tie americké. Výnos 10-ročného nemeckého Bundu sa dostal nad 3,32 % (max za 15 rokov).</p>
+      <p style="margin-bottom:0;"><strong>Ázia:</strong> japonské dlhopisy pod ešte väčším tlakom. Výnos 10-ročných JGB na 2,95 %, čo je najviac za posledných 90 rokov.</p>
+    </div>
+    <div class="tab-panel" data-panel="komodity">
+      <h4>Komodity</h4>
+      <p><strong>Zlato:</strong> cena zlata sa po kľudnom júli prudko dvihla až na 4 700 USD za uncu. Záver stabilizoval na 4 440 USD, čo je +10 %.</p>
+      <p><strong>Dolár:</strong> po prejave vlády USA dolár prudko prepadol, no výhľad Fedu ho zachránil a ku koncu sa drží na úrovni 1,1615 USD za euro.</p>
+      <p style="margin-bottom:0;"><strong>Ropa:</strong> pokračuje v extrémnej kolísavosti — z 80 na 95 USD za barel (+18 %). Cena by sa mohla ustáliť dlhšie na úrovni okolo 90 USD.</p>
+    </div>
+    <div class="tab-panel" data-panel="krypto">
+      <h4>Kryptomeny</h4>
+      <p style="margin-bottom:0;">Úzke júlové pásmo Bitcoinu nevydržalo a kryptomena explodovala nad 80 000 USD, čo je rast za pár dní o +30 %.</p>
+    </div>
+
+    <div class="card reveal" style="margin-top:28px;">
+      <h3>Kľúčové trhové dáta k 31. 8. 2026</h3>
+      <div class="data-table-wrap" style="margin-top:16px;">
+        <table class="datatbl">
+          <thead><tr><th>Index</th><th>Cena</th><th>Zmena od 1.1.26</th><th>Trend</th></tr></thead>
+          <tbody id="indicesTbody"></tbody>
+        </table>
+      </div>
+      <div class="mini-cards" id="rateCards"></div>
+      <div class="data-table-wrap" style="margin-top:16px;">
+        <table class="datatbl">
+          <thead><tr><th>Dlhopisy — výnos</th><th>Aktuálne</th><th>Zmena od 1.1.26</th><th>Trend</th></tr></thead>
+          <tbody id="bondsTbody"></tbody>
+        </table>
+      </div>
+      <div class="mini-cards" id="otherCards"></div>
+
+      <h4 style="margin-top:32px;font-size:14.5px;color:var(--text-dim);">Výkonnosť hlavných indexov od 1. 1. 2026 (%)</h4>
+      <div class="barchart" id="perfBarChart"></div>
+
+      <div class="netreturn-box">
+        <div class="nrc">
+          <div class="lbl">Bezpečný prístav — peňažný trh</div>
+          <div class="val">1,84 % ročne</div>
+        </div>
+        <div class="nrc">
+          <div class="lbl">Dlhopisová tranža 2029</div>
+          <div class="val">2,80 % ročne</div>
+        </div>
+      </div>
+      <p class="perf-note">Aktuálny odhadovaný čistý výnos k 1. 9. 2026. Zdroj: interné dáta, pozri zdroje v pätičke stránky.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= VÝKONNOSŤ FONDOV ================= -->
+<section id="vykonnost">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Výkonnosť stratégií</span>
+      <h2>Ako si viedli hlavné investičné stratégie</h2>
+      <p class="lede">Kliknutím na hlavičku stĺpca môžete tabuľku zoradiť podľa obdobia, ktoré vás zaujíma.</p>
+    </div>
+    <div class="perf-table-wrap reveal">
+      <table class="perftbl" id="perfTable">
+        <thead>
+          <tr>
+            <th data-key="name">Stratégia</th>
+            <th data-key="m1">1M % <span class="arrow">▾</span></th>
+            <th data-key="m3">3M % <span class="arrow">▾</span></th>
+            <th data-key="m6">6M % <span class="arrow">▾</span></th>
+            <th data-key="y1">1R % <span class="arrow">▾</span></th>
+            <th data-key="y3">3R %p.a. <span class="arrow">▾</span></th>
+            <th data-key="y10">10R %p.a. <span class="arrow">▾</span></th>
+            <th data-key="dd">Max prepad % <span class="arrow">▾</span></th>
+          </tr>
+        </thead>
+        <tbody id="perfTbody"></tbody>
+      </table>
+    </div>
+    <p class="perf-note reveal">Max. prepad počítaný od 1. 1. 2023. Hodnoty 10R označené „~” sú odhadom na základe kratšej histórie fondu. Historická výkonnosť nie je zárukou budúcich výnosov.</p>
+  </div>
+</section>
+
+<!-- ================= TOP TÉMY ================= -->
+<section id="temy" style="background:linear-gradient(180deg, transparent, rgba(0,26,156,0.08), transparent);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Top mediálne témy</span>
+      <h2>10 tém, ktoré hýbali trhmi v auguste</h2>
+      <p class="lede">Stručný monitoring hlavných finančných tém mesiaca v médiách. Kliknutím rozbaľte celý text.</p>
+    </div>
+    <div class="accordion reveal" id="accordionList"></div>
+  </div>
+</section>
+
+<!-- ================= PRE VÁS / CALCULATOR ================= -->
+<section id="pre-vas">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Čo to znamená pre vás</span>
+      <h2>Využívate súčasnú situáciu naplno?</h2>
+      <p class="lede">Trhy rastú, posledných 5 rokov akcie zarábali viac než dlhodobý priemer. Pozrite sa, čo by pre váš plán znamenalo pridať čo i len malú sumu mesačne navyše.</p>
+    </div>
+    <div class="calc-card reveal">
+      <div>
+        <div class="calc-field">
+          <label>Koľko investujete mesačne dnes (€)</label>
+          <div class="row">
+            <input type="number" class="calc-input" id="calcBase" value="100" min="0" step="10">
+          </div>
+        </div>
+        <div class="calc-field">
+          <label>O koľko € mesačne chcete pridať: <b id="calcExtraLabel" style="color:var(--coral-light);">+50 €</b></label>
+          <div class="row">
+            <input type="range" class="calc-slider" id="calcExtra" min="0" max="300" step="10" value="50">
+          </div>
+        </div>
+        <div class="calc-field">
+          <label>Investičný horizont</label>
+          <div class="chip-row" id="calcHorizon">
+            <button class="chip" data-years="10">10 rokov</button>
+            <button class="chip active" data-years="15">15 rokov</button>
+            <button class="chip" data-years="20">20 rokov</button>
+          </div>
+        </div>
+        <div class="calc-field" style="margin-bottom:0;">
+          <label>Predpoklad ročného výnosu</label>
+          <div class="chip-row" id="calcRate">
+            <button class="chip" data-rate="6">Konzervatívny 6 %</button>
+            <button class="chip active" data-rate="9">Historický priemer ~9 %</button>
+          </div>
+        </div>
+      </div>
+      <div class="calc-result">
+        <div class="biglabel">Navyše na konci horizontu vďaka pridaným €</div>
+        <div class="bignum" id="calcResultNum">0 €</div>
+        <div class="subline">Len z tej sumy, ktorú pridáte navyše k súčasnému vkladu.</div>
+        <div class="waitline" id="calcWaitLine"></div>
+        <a class="btn btn-primary" id="calcWaBtn" href="#" target="_blank" rel="noopener" style="margin-top:20px;width:100%;justify-content:center;">Prebrať to so mnou na WhatsApp</a>
+        <div class="calc-disclaimer">Ide o ilustračný prepočet s pravidelným mesačným vkladom pri predpokladanom stálom ročnom výnose. Nejde o sľub ani záruku výnosu — hodnota investície môže rovnako rásť ako klesať a minulá výkonnosť nie je zárukou budúcej.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= KONTAKT ================= -->
+<section id="kontakt">
+  <div class="wrap">
+    <div class="contact-card reveal">
+      <div>
+        <span class="eyebrow" style="color:var(--peach);">Vaša sprievodkyňa na kapitálových trhoch</span>
+        <h2>Poďme sa spolu pozrieť na váš investičný plán.</h2>
+        <p style="color:var(--periwinkle);opacity:.85;max-width:480px;">Informačný kompas vám každý mesiac ukáže, čo sa deje na trhoch. Ak si chcete overiť, či váš plán túto situáciu využíva čo najlepšie, napíšte mi — najrýchlejšie cez WhatsApp.</p>
+        <div class="credentials-row">
+          <div class="c"><div class="num">600+</div><div class="lbl">spokojných klientov</div></div>
+          <div class="c"><div class="num">1 mil. €+</div><div class="lbl">spravovaného majetku</div></div>
+          <div class="c"><div class="num">Licencia</div><div class="lbl">na všetky sektory fin. trhu</div></div>
+        </div>
+      </div>
+      <div class="contact-panel">
+        <a class="btn whatsapp-btn" id="ctaWaBtn" href="#" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.44 9.9-9.9 0-2.64-1.03-5.13-2.9-7-1.87-1.87-4.36-2.92-7-2.92zm0 18.02h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.32a8.24 8.24 0 0 1-1.26-4.4c0-4.55 3.7-8.25 8.26-8.25 2.2 0 4.28.86 5.84 2.42a8.2 8.2 0 0 1 2.41 5.84c0 4.55-3.7 8.28-8.25 8.28z"/></svg>
+          Napísať na WhatsApp
+        </a>
+        <div class="or">alebo emailom</div>
+        <a class="email-link" href="mailto:info@gramotneslovensko.sk">info@gramotneslovensko.sk</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<a class="wa-float" id="floatWaBtn" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="#06210f"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.44 9.9-9.9 0-2.64-1.03-5.13-2.9-7-1.87-1.87-4.36-2.92-7-2.92zm0 18.02h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.32a8.24 8.24 0 0 1-1.26-4.4c0-4.55 3.7-8.25 8.26-8.25 2.2 0 4.28.86 5.84 2.42a8.2 8.2 0 0 1 2.41 5.84c0 4.55-3.7 8.28-8.25 8.28z"/></svg>
+</a>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <img class="footer-logo" alt="Zuzana Setnická" src="data:image/png;base64,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">
+        <p style="color:var(--text-dim);font-size:13.5px;max-width:420px;">Zuzana Setnická — zakladateľka Gramotné Slovensko, sprostredkovateľka OVB Allfinanz Slovensko, a. s.</p>
+        <p class="sources"><strong style="color:var(--text-dim);">Zdroje:</strong> yahoo.com, cnbc.com, ft.com, yardeni.com, wsj.com, tradingeconomics.com, cnn.com, fxempire.com, fred.stlouisfed.org, amundi.com, morningstar.com, eic.eu, conseq.sk, investing.com, imf.org, ec.europa.eu, nbs.sk</p>
+      </div>
+      <div class="disclaimer-box">
+        <strong>Upozornenie OVB Allfinanz Slovensko, a. s. pre spolupracovníkov vo vzťahu ku konfliktu záujmov</strong>
+        <p style="margin:12px 0 0;">S investovaním do finančných nástrojov je spojené riziko a doterajší výnos nie je zárukou budúcich výnosov. Hodnota investície môže rovnako rásť, ako aj klesať. Tento materiál nepredstavuje osobné odporúčanie na kúpu, predaj alebo podržanie finančných nástrojov, ale slúži výlučne ako vzdelávacia a informačná pomôcka. Materiál nepredstavuje reklamné ani iné marketingové oznámenie, ani nenahrádza posudzovanie vhodnosti v zmysle príslušných ustanovení osobitných predpisov. Takisto neponúka plnohodnotný pohľad na poskytovanie finančného sprostredkovania v sektore kapitálového trhu. Tento materiál neslúži na plnenie zákonných povinností uvedených v osobitných právnych predpisoch.</p>
+        <p style="margin:12px 0 0;">Podriadený finančný agent je pri výkone finančného sprostredkovania bezpodmienečne povinný uprednostniť záujmy potenciálneho klienta a/alebo klienta pred vlastnými záujmami alebo záujmami OVB Allfinanz Slovensko a. s. a ponúknuť potenciálnemu klientovi a/alebo klientovi riešenie, ktoré najlepšie zodpovedá jeho požiadavkám a potrebám, jeho znalostiam a skúsenostiam, jeho finančnej situácii a s ohľadom na ponúkanú/ú finančnú službu/finančný nástroj aj jeho schopnosti znášať stratu, jeho odolnosti voči riziku, ako aj jeho investičným cieľom a iným jeho charakteristikám. Pokiaľ podriadený finančný agent môže potenciálnemu klientovi a/alebo klientovi ponúknuť inú finančnú službu/iný finančný nástroj, ktorá/ý lepšie spĺňa potreby potenciálneho klienta a/alebo klienta, je povinný potenciálnemu klientovi a/alebo klientovi túto finančnú službu/tento finančný nástroj ponúknuť bez ohľadu na výšku odmeny.</p>
+      </div>
+    </div>
+    <div class="foot-meta">
+      <span>© 2026 Gramotné Slovensko · Informačný kompas — August 2026</span>
+      <span>Vytvorené pre klientov Zuzany Setnickej</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* =========================================================================
+   MESAČNÉ ÚDAJE — pri príprave ďalšieho vydania aktualizujte tieto polia.
+   ========================================================================= */
+const INDICES = [
+  {name:'S&P 500', price:'7 686 USD', chg:12.29, trend:'up'},
+  {name:'Euro Stoxx 50', price:'6 420 EUR', chg:10.77, trend:'up'},
+  {name:'DAX', price:'26 258 EUR', chg:7.22, trend:'up'},
+  {name:'FTSE 100', price:'10 824 GBP', chg:8.99, trend:'up'},
+  {name:'Nikkei 225', price:'66 312 JPY', chg:31.73, trend:'up2'},
+];
+const RATES = [
+  {name:'FED', val:'3,75 %', chg:'očak. 3,75 %', trend:'flat'},
+  {name:'ECB', val:'2,40 %', chg:'očak. 2,40 %', trend:'flat'},
+  {name:'BOJ', val:'1,00 %', chg:'očak. 1,00 %', trend:'up'},
+];
+const BONDS = [
+  {name:'US-10R', val:'4,76 %', chg:'+0,61 % od 1.1.26', trend:'up'},
+  {name:'US-2R', val:'4,35 %', chg:'+0,90 % od 1.1.26', trend:'up'},
+  {name:'GER-10R', val:'3,32 %', chg:'+0,46 % od 1.1.26', trend:'up'},
+  {name:'GER-2R', val:'2,92 %', chg:'+0,80 % od 1.1.26', trend:'up'},
+  {name:'SVK-10R', val:'4,01 %', chg:'+0,48 % od 1.1.26', trend:'up'},
+  {name:'SVK-2R', val:'3,19 %', chg:'+0,55 % od 1.1.26', trend:'up'},
+];
+const OTHER = [
+  {name:'EUR/USD', val:'1,1615', chg:'-1,12 % od 1.1.26', trend:'flat'},
+  {name:'Ropa Brent', val:'90,49 $', chg:'+48,73 % od 1.1.26', trend:'up2'},
+  {name:'Zlato', val:'4 441 $', chg:'+2,73 % od 1.1.26', trend:'up'},
+  {name:'Bitcoin', val:'78 564 $', chg:'-10,23 % od 1.1.26', trend:'down'},
+];
+const PERF = [
+  {name:'TOP 500 amerických akcií', m1:2.19, m3:1.62, m6:13.58, y1:19.80, y3:16.76, y10:13.50, dd:23.32},
+  {name:'Rozvinutý svet', m1:1.90, m3:2.44, m6:11.12, y1:20.15, y3:16.24, y10:11.54, dd:21.73},
+  {name:'Globálne akcie', m1:2.18, m3:1.88, m6:10.71, y1:21.95, y3:16.49, y10:9.38, dd:21.07, approx10:true},
+  {name:'Globálni dividendoví lídri', m1:0.97, m3:5.76, m6:7.18, y1:25.47, y3:16.13, y10:8.32, dd:16.43, approx10:true},
+  {name:'Globálna stratégia 80/20', m1:1.48, m3:0.86, m6:7.43, y1:16.53, y3:13.24, y10:8.48, dd:16.79, approx10:true},
+  {name:'Globálna stratégia 60/40', m1:1.78, m3:1.07, m6:5.31, y1:12.72, y3:10.64, y10:6.64, dd:13.05, approx10:true},
+  {name:'Amundi RYTMUS S15+', m1:1.29, m3:3.32, m6:8.30, y1:17.07, y3:13.37, y10:null, dd:19.54},
+  {name:'Amundi RYTMUS S10+', m1:0.50, m3:4.90, m6:8.61, y1:25.68, y3:16.70, y10:null, dd:18.96},
+  {name:'Amundi ETF — Akciové portfólio', m1:1.63, m3:2.33, m6:9.10, y1:20.98, y3:14.26, y10:null, dd:20.92},
+  {name:'ARTS ETF Special Situations', m1:1.92, m3:-5.89, m6:-0.14, y1:15.98, y3:8.06, y10:null, dd:13.25},
+];
+const THEMES = [
+  {t:'Centrálna banka USA posunula výhľad smerom k vyšším sadzbám', b:'Počas augusta sa prudko zmenili očakávania trhu voči Fedu, keď pretrvávajúca inflácia a tvrdší postoj predsedu Fedu Kevina Warsha obnovili špekulácie, že ďalším krokom nemusí byť zníženie, ale zvýšenie sadzieb. Výnosy krátkych amerických dlhopisov vzrástli, dolár posilnil a akcie sa ku koncu mesiaca dostali pod tlak najmä v sektoroch citlivých na úrokové sadzby. August sa tak skončil s výrazne vyššou citlivosťou trhov na každý nový údaj o inflácii a trhu práce pred septembrovým zasadnutím Fedu.'},
+  {t:'Výpredaj dlhopisov prinútil vládu zdvojnásobiť spätné odkupy dlhu', b:'Rast dlhodobých amerických výnosov počas augusta odrážal obavy z inflácie, vysokých deficitov a rastúcej ponuky štátneho dlhu. Minister financií Scott Bessent v reakcii na tlak zdvojnásobil objem tzv. buybackov dlhopisov so splatnosťou 10 až 30 rokov z 2 na 4 miliardy dolárov na jednu operáciu, čo dočasne stlačilo výnosy nadol. Ku koncu mesiaca však trh tento krok vnímal skôr ako technickú podporu likvidity než riešenie fiškálnych problémov, takže na dlhom konci výnosovej krivky zostal tlak.'},
+  {t:'Konflikt v Iráne vrátil ropu späť medzi hlavné inflačné riziká', b:'Napätie medzi USA a Iránom a obavy z narušenej dopravy cez Hormuzský prieliv počas augusta opakovane tlačili ceny ropy nahor. Ku koncu mesiaca nové vojenské akcie opäť zvýšili rizikovú prémiu v energetických cenách a zhoršili inflačný výhľad práve v čase, keď centrálne banky zvažovali ďalší postup so sadzbami.'},
+  {t:'Obchodné napätie sa rozšírilo a clá začali mať konkrétnejší ekonomický dopad', b:'Počas augusta sa zhoršili obchodné vzťahy medzi USA a viacerými partnermi, pričom nové clá voči Kanade a pokračujúce obchodné spory s Európou a Čínou zvýšili náklady pre firmy. Podniky začali viac započítavať clá do cien, dodávateľských reťazcov a investičných rozhodnutí. Na konci mesiaca tak obchodná politika predstavovala súčasne inflačný aj rastový problém, pretože zvyšovala vstupné náklady a zároveň tlmila medzinárodný obchod a investície.'},
+  {t:'AI boom sa zmenil na otázku financovania a zadlženia', b:'Silné výsledky Nvidie potvrdili pokračujúci dopyt po AI infraštruktúre a krátkodobo podporili technologické akcie, no pozornosť trhu sa čoraz viac presúvala na to, koľko kapitálu bude ďalšia fáza expanzie vyžadovať. Dátové centrá a ich partneri začali pripravovať obrovské objemy dlhového a projektového financovania, čo zvýšilo obavy z rastúcej zadlženosti. Ku koncu augusta preto AI zostávala hlavným motorom rastu akcií, ale zároveň sa z nej stalo jedno z najväčších dlhopisových rizík.'},
+  {t:'Svetová ekonomika je odolná, ale rozdiely medzi regiónmi sa zväčšujú', b:'Augustové dáta ukázali, že globálna ekonomika zvládala kombináciu vyšších sadzieb, ciel a geopolitického napätia lepšie, než sa čakalo, najmä v časti vyspelých ekonomík. Ku koncu mesiaca preto trhy nevnímali hrozbu okamžitej recesie, skôr jej rastúcu rozdielnosť medzi regiónmi USA, Európy a Ázie.'},
+  {t:'Čína zostala najslabším článkom globálneho rastu', b:'Čínske dáta počas augusta naďalej ukazovali slabý domáci dopyt, nevýraznú dôveru firiem a pokračujúce problémy v stavebníctve a službách. August skončil síce s miernejším pesimizmom voči čínskemu priemyslu, no bez zásadného zlepšenia výhľadu pre spotrebu, reality a širší domáci rast.'},
+  {t:'Akciový trh zostal vysoko, ale pod povrchom sa začala prudká rotácia', b:'Výsledky veľkých technologických spoločností počas augusta vytvorili čoraz väčšie rozdiely medzi jednotlivými titulmi a narušili dovtedajšiu jednotnú dominanciu najväčšej AI. Ku koncu mesiaca sa časť kapitálu presúvala do sektorov, ktoré predtým výrazne zaostávali. Hlavné indexy preto mohli pôsobiť relatívne stabilne, ale pod ich povrchom sa výrazne menilo líderstvo a rástlo riziko pre investorov príliš koncentrovaných v najdrahších technologických tituloch.'},
+  {t:'Slovensko: slovenská ekonomika ďalej spomaľovala', b:'Rast slovenského HDP sa v druhom štvrťroku spomalil na 0,7 % medziročne z 0,9 % v prvom štvrťroku, čo bol najslabší rast za posledné štyri štvrťroky. Ekonomiku držala nad vodou najmä konečná spotreba, zatiaľ čo investičná aktivita klesla a priemyselné firmy zostali opatrné pri prijímaní nových ľudí. Ku koncu augusta tak Slovensko nevstupovalo do recesie, ale obraz ekonomiky sa posunul k výrazne slabšiemu rastu a investičnej dynamike.'},
+  {t:'Slovensko: priemysel sa začal stabilizovať, no inflácia a slabší trh práce zostali brzdou', b:'Augustové údaje priniesli prvé známky mierneho zlepšenia v slovenskom priemysle, keď sa výroba a nové objednávky po predchádzajúcom poklese vrátili k rastu, čo naznačilo možné dno výrobného cyklu. Súčasne však inflácia za júl dosiahla 3,3 % a nezamestnanosť mierne stúpla na 5,3 %, takže mierne oživenie sa zatiaľ neprenášalo výraznejšie do domácností a trhu práce.'},
+];
+const WHATSAPP_NUMBER = '421918414369';
+
+/* ========================================================================= */
+
+function waLink(msg){
+  return 'https://wa.me/'+WHATSAPP_NUMBER+'?text='+encodeURIComponent(msg);
+}
+document.getElementById('navWaBtn').href = waLink('Dobrý deň Zuzana, prečítal/a som si Informačný kompas za august 2026 a rád/rada by som prebral/a svoj investičný plán.');
+document.getElementById('ctaWaBtn').href = waLink('Dobrý deň Zuzana, prečítal/a som si Informačný kompas za august 2026 a rád/rada by som prebral/a svoj investičný plán.');
+document.getElementById('floatWaBtn').href = waLink('Dobrý deň Zuzana, mám otázku k Informačnému kompasu za august 2026.');
+
+/* ---- read more toggles ---- */
+document.querySelectorAll('.readmore').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const target = document.getElementById(btn.dataset.target);
+    target.classList.toggle('open');
+    btn.classList.toggle('open');
+    btn.firstChild.textContent = target.classList.contains('open') ? 'Zobraziť menej ' : 'Zobraziť celý komentár ';
+  });
+});
+
+/* ---- tabs ---- */
+document.querySelectorAll('[data-tabgroup]').forEach(group=>{
+  const btns = group.querySelectorAll('.tab-btn');
+  btns.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      btns.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const panels = group.parentElement.querySelectorAll('.tab-panel');
+      panels.forEach(p=>p.classList.toggle('active', p.dataset.panel===btn.dataset.tab));
+    });
+  });
+});
+
+/* ---- semafor bars ---- */
+function initSemafor(el){
+  const value = parseFloat(el.dataset.value);
+  const avg = parseFloat(el.dataset.avg);
+  const min = parseFloat(el.dataset.min);
+  const max = parseFloat(el.dataset.max);
+  const pct = v => Math.max(0, Math.min(100, ((v-min)/(max-min))*100));
+  const avgEl = el.querySelector('.semafor-avg');
+  const markerEl = el.querySelector('.semafor-marker');
+  avgEl.style.left = pct(avg)+'%';
+  avgEl.querySelector('span').textContent = el.dataset.avgLabel;
+  markerEl.querySelector('span').textContent = el.dataset.valueLabel;
+  markerEl.dataset.targetLeft = pct(value)+'%';
+  markerEl.style.left = '0%';
+}
+document.querySelectorAll('[data-semafor]').forEach(initSemafor);
+
+/* ---- gauges (SVG semicircle) ---- */
+function polar(cx,cy,r,angleDeg){
+  const a = angleDeg*Math.PI/180;
+  return {x:cx+r*Math.cos(a), y:cy-r*Math.sin(a)};
+}
+function bandPath(cx,cy,rOuter,rInner,startAngle,endAngle){
+  const o1=polar(cx,cy,rOuter,startAngle), o2=polar(cx,cy,rOuter,endAngle);
+  const i1=polar(cx,cy,rInner,endAngle), i2=polar(cx,cy,rInner,startAngle);
+  return `M ${o1.x} ${o1.y} A ${rOuter} ${rOuter} 0 0 1 ${o2.x} ${o2.y} L ${i1.x} ${i1.y} A ${rInner} ${rInner} 0 0 0 ${i2.x} ${i2.y} Z`;
+}
+function buildGauge(container){
+  const value = parseFloat(container.dataset.value);
+  const left = container.dataset.left;
+  const right = container.dataset.right;
+  const title = container.dataset.title;
+  const cx=100, cy=100, rOuter=90, rInner=62;
+  const colors = ['#e5484d','#f6862c','#f5d020','#a8d97a','#22a559'];
+  const svgNS='http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(svgNS,'svg');
+  svg.setAttribute('viewBox','0 0 200 112');
+  for(let i=0;i<5;i++){
+    const startAngle = 180 - i*36;
+    const endAngle = 180 - (i+1)*36;
+    const path = document.createElementNS(svgNS,'path');
+    path.setAttribute('d', bandPath(cx,cy,rOuter,rInner,startAngle,endAngle));
+    path.setAttribute('fill', colors[i]);
+    svg.appendChild(path);
+  }
+  // needle
+  const needleGroup = document.createElementNS(svgNS,'g');
+  needleGroup.setAttribute('class','needle-group');
+  needleGroup.style.transformOrigin = cx+'px '+cy+'px';
+  needleGroup.style.transform = 'rotate(-180deg)';
+  needleGroup.style.transition = 'transform 1.3s cubic-bezier(.2,.8,.2,1)';
+  const needle = document.createElementNS(svgNS,'line');
+  needle.setAttribute('x1', cx); needle.setAttribute('y1', cy);
+  needle.setAttribute('x2', cx+rInner-8); needle.setAttribute('y2', cy);
+  needle.setAttribute('stroke', '#0a0a0a');
+  needle.setAttribute('stroke-width','5');
+  needle.setAttribute('stroke-linecap','round');
+  needleGroup.appendChild(needle);
+  const hub = document.createElementNS(svgNS,'circle');
+  hub.setAttribute('cx',cx); hub.setAttribute('cy',cy); hub.setAttribute('r',7); hub.setAttribute('fill','#0a0a0a');
+  svg.appendChild(needleGroup);
+  svg.appendChild(hub);
+  container.appendChild(svg);
+  const glabels = document.createElement('div');
+  glabels.className='glabels';
+  glabels.innerHTML = `<span>${left}</span><span>${right}</span>`;
+  container.appendChild(glabels);
+  const gtitle = document.createElement('div');
+  gtitle.className='gtitle';
+  gtitle.textContent = title;
+  container.appendChild(gtitle);
+
+  const targetRotation = -180 + (value/100)*180;
+  container._animateGauge = ()=>{
+    needleGroup.style.transform = 'rotate('+targetRotation+'deg)';
+  };
+}
+document.querySelectorAll('[data-gauge]').forEach(buildGauge);
+
+/* ---- reveal on scroll (also triggers gauges/semafor/bars) ---- */
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('in');
+      entry.target.querySelectorAll('[data-gauge]').forEach(g=> g._animateGauge && g._animateGauge());
+      entry.target.querySelectorAll('[data-semafor] .semafor-marker').forEach(m=>{
+        requestAnimationFrame(()=>{ m.style.left = m.dataset.targetLeft; });
+      });
+      entry.target.querySelectorAll('.barchart-fill').forEach(b=>{
+        b.style.width = b.dataset.target;
+      });
+      entry.target.querySelectorAll('.perf-bar-fg').forEach(b=>{
+        b.style.width = b.dataset.target;
+      });
+      entry.target.querySelectorAll('[data-count]').forEach(animateCount);
+      io.unobserve(entry.target);
+    }
+  });
+},{threshold:0.25});
+revealEls.forEach(el=>io.observe(el));
+// gauges outside reveal wrapper still need trigger fallback
+document.querySelectorAll('[data-gauge]').forEach(g=>{
+  const io2 = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{ if(entry.isIntersecting){ g._animateGauge(); io2.disconnect(); } });
+  },{threshold:0.3});
+  io2.observe(g);
+});
+document.querySelectorAll('[data-semafor] .semafor-marker').forEach(m=>{
+  const io3 = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{ if(entry.isIntersecting){ m.style.left = m.dataset.targetLeft; io3.disconnect(); } });
+  },{threshold:0.3});
+  io3.observe(m);
+});
+
+/* ---- animated counters ---- */
+function animateCount(el){
+  const target = parseFloat(el.dataset.count);
+  const suffix = el.dataset.suffix || '';
+  const dur = 1400;
+  const start = performance.now();
+  function tick(now){
+    const p = Math.min(1, (now-start)/dur);
+    const eased = 1-Math.pow(1-p,3);
+    el.textContent = (target*eased).toFixed(1).replace('.',',') + suffix;
+    if(p<1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+document.querySelectorAll('[data-text]').forEach(el=>{ el.textContent = el.dataset.text; });
+
+/* ---- render market tables ---- */
+function trendArrow(trend){
+  if(trend==='up') return '<span class="trend-up">▲</span>';
+  if(trend==='up2') return '<span class="trend-up">▲▲</span>';
+  if(trend==='down') return '<span class="trend-down">▼</span>';
+  return '<span class="trend-flat">→</span>';
+}
+document.getElementById('indicesTbody').innerHTML = INDICES.map(r=>
+  `<tr><td>${r.name}</td><td>${r.price}</td><td class="${r.chg>=0?'trend-up':'trend-down'}">${r.chg>0?'+':''}${r.chg.toFixed(2).replace('.',',')}%</td><td>${trendArrow(r.trend)}</td></tr>`
+).join('');
+document.getElementById('bondsTbody').innerHTML = BONDS.map(r=>
+  `<tr><td>${r.name}</td><td>${r.val}</td><td>${r.chg}</td><td>${trendArrow(r.trend)}</td></tr>`
+).join('');
+document.getElementById('rateCards').innerHTML = RATES.map(r=>
+  `<div class="mini-card"><div class="lbl">${r.name} — sadzba</div><div class="val">${r.val}</div><div class="chg" style="color:var(--text-dim);">${r.chg}</div></div>`
+).join('');
+document.getElementById('otherCards').innerHTML = OTHER.map(r=>{
+  const cls = r.trend==='up'||r.trend==='up2' ? 'trend-up' : (r.trend==='down'?'trend-down':'trend-flat');
+  return `<div class="mini-card"><div class="lbl">${r.name}</div><div class="val">${r.val}</div><div class="chg ${cls}">${r.chg}</div></div>`;
+}).join('');
+
+/* ---- performance bar chart (YTD by index) ---- */
+const maxChg = Math.max(...INDICES.map(r=>r.chg));
+document.getElementById('perfBarChart').innerHTML = INDICES.map(r=>
+  `<div class="barchart-row">
+     <div class="name">${r.name}</div>
+     <div class="barchart-track"><div class="barchart-fill" data-target="${(r.chg/maxChg*100).toFixed(1)}%"></div></div>
+     <div class="pct">+${r.chg.toFixed(2).replace('.',',')}%</div>
+   </div>`
+).join('');
+
+/* ---- performance table (sortable) ---- */
+let perfSortKey = 'y1';
+let perfSortDir = -1;
+function renderPerfTable(){
+  const rows = [...PERF].sort((a,b)=>{
+    const av = a[perfSortKey]===null||a[perfSortKey]===undefined ? -Infinity : a[perfSortKey];
+    const bv = b[perfSortKey]===null||b[perfSortKey]===undefined ? -Infinity : b[perfSortKey];
+    if(perfSortKey==='name') return av.localeCompare ? av.localeCompare(bv)*perfSortDir : 0;
+    return (av-bv)*perfSortDir;
+  });
+  const maxY1 = Math.max(...PERF.map(r=>r.y1));
+  document.getElementById('perfTbody').innerHTML = rows.map(r=>{
+    const cell = (v, approx)=> v===null||v===undefined ? '<td style="color:var(--text-dimmer);">—</td>' : `<td class="${v>=0?'':''}">${v>0?'+':''}${v.toFixed(2).replace('.',',')}%${approx&&r.approx10?' <span style=\"color:var(--text-dimmer);font-size:10px;\">~</span>':''}</td>`;
+    return `<tr>
+      <td class="fundname">${r.name}</td>
+      ${cell(r.m1)}
+      ${cell(r.m3)}
+      ${cell(r.m6)}
+      <td class="perf-bar-cell"><div class="perf-bar-bg"><div class="perf-bar-fg" data-target="${Math.max(0,r.y1/maxY1*100)}%"></div></div><span class="perf-bar-val">+${r.y1.toFixed(2).replace('.',',')}%</span></td>
+      ${cell(r.y3)}
+      ${cell(r.y10,true)}
+      <td style="color:var(--red);">${r.dd.toFixed(2).replace('.',',')}%</td>
+    </tr>`;
+  }).join('');
+  document.querySelectorAll('.perf-bar-fg').forEach(b=> b.style.width = b.dataset.target );
+  document.querySelectorAll('#perfTable thead th').forEach(th=>{
+    th.classList.toggle('sorted', th.dataset.key===perfSortKey);
+  });
+}
+renderPerfTable();
+document.querySelectorAll('#perfTable thead th[data-key]').forEach(th=>{
+  th.addEventListener('click', ()=>{
+    if(th.dataset.key==='name') return;
+    if(perfSortKey===th.dataset.key){ perfSortDir*=-1; } else { perfSortKey=th.dataset.key; perfSortDir=-1; }
+    renderPerfTable();
+  });
+});
+
+/* ---- accordion (media themes) ---- */
+document.getElementById('accordionList').innerHTML = THEMES.map((th,i)=>`
+  <div class="acc-item">
+    <div class="acc-head">
+      <div class="accnum">${(i+1).toString().padStart(2,'0')}</div>
+      <div class="acctitle">${th.t}</div>
+      <svg class="accchevron" width="16" height="16" viewBox="0 0 12 8" fill="none"><path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </div>
+    <div class="acc-body"><div class="acc-body-inner">${th.b}</div></div>
+  </div>
+`).join('');
+document.querySelectorAll('.acc-item').forEach(item=>{
+  const head = item.querySelector('.acc-head');
+  const body = item.querySelector('.acc-body');
+  head.addEventListener('click', ()=>{
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.acc-item.open').forEach(o=>{ o.classList.remove('open'); o.querySelector('.acc-body').style.maxHeight=null; });
+    if(!isOpen){ item.classList.add('open'); body.style.maxHeight = body.scrollHeight+'px'; }
+  });
+});
+
+/* ---- calculator ---- */
+const calcBase = document.getElementById('calcBase');
+const calcExtra = document.getElementById('calcExtra');
+const calcExtraLabel = document.getElementById('calcExtraLabel');
+let calcYears = 15;
+let calcRate = 9;
+function fv(monthly, years, ratePct){
+  const i = (ratePct/100)/12;
+  const n = years*12;
+  if(i===0) return monthly*n;
+  return monthly*((Math.pow(1+i,n)-1)/i);
+}
+function runCalc(){
+  const extra = parseFloat(calcExtra.value)||0;
+  calcExtraLabel.textContent = '+'+extra+' €';
+  const future = fv(extra, calcYears, calcRate);
+  const futurePrev = fv(extra, Math.max(1,calcYears-1), calcRate);
+  document.getElementById('calcResultNum').textContent = Math.round(future).toLocaleString('sk-SK')+' €';
+  const waitLoss = Math.max(0, future-futurePrev);
+  document.getElementById('calcWaitLine').textContent = `Ak so zvýšeným vkladom začnete o rok neskôr, k cieľu vám bude chýbať približne ${Math.round(waitLoss).toLocaleString('sk-SK')} €.`;
+  const msg = `Dobrý deň Zuzana, uvažujem, že by som zvýšil/a mesačnú investíciu o ${extra} € na ${calcYears} rokov (odhadované navyše ~${Math.round(future).toLocaleString('sk-SK')} €). Môžeme sa o tom porozprávať?`;
+  document.getElementById('calcWaBtn').href = waLink(msg);
+}
+calcExtra.addEventListener('input', runCalc);
+calcBase.addEventListener('input', runCalc);
+document.querySelectorAll('#calcHorizon .chip').forEach(chip=>{
+  chip.addEventListener('click', ()=>{
+    document.querySelectorAll('#calcHorizon .chip').forEach(c=>c.classList.remove('active'));
+    chip.classList.add('active');
+    calcYears = parseInt(chip.dataset.years);
+    runCalc();
+  });
+});
+document.querySelectorAll('#calcRate .chip').forEach(chip=>{
+  chip.addEventListener('click', ()=>{
+    document.querySelectorAll('#calcRate .chip').forEach(c=>c.classList.remove('active'));
+    chip.classList.add('active');
+    calcRate = parseFloat(chip.dataset.rate);
+    runCalc();
+  });
+});
+runCalc();
+
+/* ---- mobile menu toggle ---- */
+const mobileToggle = document.getElementById('mobileMenuToggle');
+const headerNav = document.querySelector('header.nav');
+mobileToggle.addEventListener('click', ()=>{
+  headerNav.classList.toggle('menu-open');
+  mobileToggle.textContent = headerNav.classList.contains('menu-open') ? '✕' : '☰';
+});
+document.querySelectorAll('[data-nav-mobile]').forEach(a=>{
+  a.addEventListener('click', ()=>{
+    headerNav.classList.remove('menu-open');
+    mobileToggle.textContent = '☰';
+  });
+});
+
+/* ---- scrollspy nav ---- */
+const navLinks = document.querySelectorAll('.navlinks a[data-nav]');
+const sections = ['svet','trhy','vykonnost','temy','pre-vas'].map(id=>document.getElementById(id));
+window.addEventListener('scroll', ()=>{
+  let current = sections[0];
+  sections.forEach(s=>{ if(window.scrollY + 140 >= s.offsetTop) current = s; });
+  navLinks.forEach(l=> l.classList.toggle('active', l.getAttribute('href')==='#'+current.id));
+}, {passive:true});
+</script>
+
+</body>
+</html>
