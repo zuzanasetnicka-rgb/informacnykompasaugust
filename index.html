@@ -933,7 +933,10 @@ function buildGauge(container){
     path.setAttribute('fill', colors[i]);
     svg.appendChild(path);
   }
-  // needle — dark outline behind + white core on top, so it reads against every band color
+  // needle — colored to match the band it's pointing at, with a dark outline behind
+  // so it still reads clearly against that same band's color (and against the dark bg).
+  const bandIndex = Math.max(0, Math.min(4, Math.floor(value/20)));
+  const needleColor = colors[bandIndex];
   const needleGroup = document.createElementNS(svgNS,'g');
   needleGroup.setAttribute('class','needle-group');
   needleGroup.style.transformOrigin = cx+'px '+cy+'px';
@@ -943,22 +946,32 @@ function buildGauge(container){
   needleOutline.setAttribute('x1', cx); needleOutline.setAttribute('y1', cy);
   needleOutline.setAttribute('x2', cx+rInner-8); needleOutline.setAttribute('y2', cy);
   needleOutline.setAttribute('stroke', '#0a0f2e');
-  needleOutline.setAttribute('stroke-width','8');
+  needleOutline.setAttribute('stroke-width','9');
   needleOutline.setAttribute('stroke-linecap','round');
   needleGroup.appendChild(needleOutline);
+  const needleWhite = document.createElementNS(svgNS,'line');
+  needleWhite.setAttribute('x1', cx); needleWhite.setAttribute('y1', cy);
+  needleWhite.setAttribute('x2', cx+rInner-8); needleWhite.setAttribute('y2', cy);
+  needleWhite.setAttribute('stroke', '#ffffff');
+  needleWhite.setAttribute('stroke-width','5.5');
+  needleWhite.setAttribute('stroke-linecap','round');
+  needleGroup.appendChild(needleWhite);
   const needle = document.createElementNS(svgNS,'line');
   needle.setAttribute('x1', cx); needle.setAttribute('y1', cy);
   needle.setAttribute('x2', cx+rInner-8); needle.setAttribute('y2', cy);
-  needle.setAttribute('stroke', '#ffffff');
-  needle.setAttribute('stroke-width','4');
+  needle.setAttribute('stroke', needleColor);
+  needle.setAttribute('stroke-width','3.5');
   needle.setAttribute('stroke-linecap','round');
   needleGroup.appendChild(needle);
   const hubOutline = document.createElementNS(svgNS,'circle');
-  hubOutline.setAttribute('cx',cx); hubOutline.setAttribute('cy',cy); hubOutline.setAttribute('r',9); hubOutline.setAttribute('fill','#0a0f2e');
+  hubOutline.setAttribute('cx',cx); hubOutline.setAttribute('cy',cy); hubOutline.setAttribute('r',9.5); hubOutline.setAttribute('fill','#0a0f2e');
+  const hubWhite = document.createElementNS(svgNS,'circle');
+  hubWhite.setAttribute('cx',cx); hubWhite.setAttribute('cy',cy); hubWhite.setAttribute('r',6.5); hubWhite.setAttribute('fill','#ffffff');
   const hub = document.createElementNS(svgNS,'circle');
-  hub.setAttribute('cx',cx); hub.setAttribute('cy',cy); hub.setAttribute('r',4.5); hub.setAttribute('fill','#ffffff');
+  hub.setAttribute('cx',cx); hub.setAttribute('cy',cy); hub.setAttribute('r',4); hub.setAttribute('fill',needleColor);
   svg.appendChild(needleGroup);
   svg.appendChild(hubOutline);
+  svg.appendChild(hubWhite);
   svg.appendChild(hub);
   container.appendChild(svg);
   const glabels = document.createElement('div');
