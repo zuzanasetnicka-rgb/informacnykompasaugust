@@ -933,22 +933,32 @@ function buildGauge(container){
     path.setAttribute('fill', colors[i]);
     svg.appendChild(path);
   }
-  // needle
+  // needle — dark outline behind + white core on top, so it reads against every band color
   const needleGroup = document.createElementNS(svgNS,'g');
   needleGroup.setAttribute('class','needle-group');
   needleGroup.style.transformOrigin = cx+'px '+cy+'px';
   needleGroup.style.transform = 'rotate(-180deg)';
   needleGroup.style.transition = 'transform 1.3s cubic-bezier(.2,.8,.2,1)';
+  const needleOutline = document.createElementNS(svgNS,'line');
+  needleOutline.setAttribute('x1', cx); needleOutline.setAttribute('y1', cy);
+  needleOutline.setAttribute('x2', cx+rInner-8); needleOutline.setAttribute('y2', cy);
+  needleOutline.setAttribute('stroke', '#0a0f2e');
+  needleOutline.setAttribute('stroke-width','8');
+  needleOutline.setAttribute('stroke-linecap','round');
+  needleGroup.appendChild(needleOutline);
   const needle = document.createElementNS(svgNS,'line');
   needle.setAttribute('x1', cx); needle.setAttribute('y1', cy);
   needle.setAttribute('x2', cx+rInner-8); needle.setAttribute('y2', cy);
-  needle.setAttribute('stroke', '#0a0a0a');
-  needle.setAttribute('stroke-width','5');
+  needle.setAttribute('stroke', '#ffffff');
+  needle.setAttribute('stroke-width','4');
   needle.setAttribute('stroke-linecap','round');
   needleGroup.appendChild(needle);
+  const hubOutline = document.createElementNS(svgNS,'circle');
+  hubOutline.setAttribute('cx',cx); hubOutline.setAttribute('cy',cy); hubOutline.setAttribute('r',9); hubOutline.setAttribute('fill','#0a0f2e');
   const hub = document.createElementNS(svgNS,'circle');
-  hub.setAttribute('cx',cx); hub.setAttribute('cy',cy); hub.setAttribute('r',7); hub.setAttribute('fill','#0a0a0a');
+  hub.setAttribute('cx',cx); hub.setAttribute('cy',cy); hub.setAttribute('r',4.5); hub.setAttribute('fill','#ffffff');
   svg.appendChild(needleGroup);
+  svg.appendChild(hubOutline);
   svg.appendChild(hub);
   container.appendChild(svg);
   const glabels = document.createElement('div');
